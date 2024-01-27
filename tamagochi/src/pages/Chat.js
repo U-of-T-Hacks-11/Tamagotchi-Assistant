@@ -5,21 +5,22 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition'
 
-export default function Chat() {
+export default function Chat({ onRouterChange }) {
   const {
     transcript,
     listening,
     resetTranscript,
     browserSupportsSpeechRecognition,
-  } = useSpeechRecognition({continuous: true})
-  const [messages, setMessages] = useState('');
-  const [input, setInput] = useState('');
-  const [submitAPI, setSubmitAPI] = useState(0);
-  const [chatHistory, setChatHistory] = useState([]);
+  } = useSpeechRecognition({ continuous: true })
+  const [messages, setMessages] = useState('')
+  const [input, setInput] = useState('')
+  const [submitAPI, setSubmitAPI] = useState(0)
+  const [chatHistory, setChatHistory] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setShowRes(true)
         // console.log(input, chatHistory)
         // console.log('Fetching data')
         setInput(input)
@@ -48,8 +49,8 @@ export default function Chat() {
     }
   }, [submitAPI])
 
-  
   const [router, setRouter] = useState('__')
+  const [showRes, setShowRes] = useState(true)
 
   useEffect(() => {
     const changeFeature = async () => {
@@ -58,18 +59,24 @@ export default function Chat() {
           headers: {
             message: input,
           },
-        });
-        console.log(response.data); // Log the response to check the received data
-        setRouter(response.data);
+        })
+        console.log(response.data) // Log the response to check the received data
+        setRouter(response.data)
+        if (response.data.prediction !== 'Fallback') {
+          onRouterChange(response.data.prediction);
+          setShowRes(false);
+        } else {
+          setShowRes(true);
+        }
       } catch (error) {
-        console.error('Error fetching data:', error.message);
+        console.error('Error fetching data:', error.message)
       }
-    };
-  
-    if (submitAPI > 0) {
-      changeFeature();
     }
-  }, [submitAPI]);
+
+    if (submitAPI > 0) {
+      changeFeature()
+    }
+  }, [submitAPI, onRouterChange])
 
   // console.log(chatHistory)
   if (!browserSupportsSpeechRecognition) {
@@ -102,8 +109,11 @@ export default function Chat() {
           >
             Submit
           </Button>
-          <h1>{router}</h1>
-          <div>{messages}</div>
+          {/* <h1>{router}</h1> */}
+          {/* <h1>{typeof router === 'object' ? router.prediction : router}</h1> */}
+
+
+          {showRes ? <p>{messages}</p> : null}
         </Group>
       </div>
     </div>

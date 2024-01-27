@@ -14,6 +14,22 @@ import { FaHome, FaHourglassHalf } from 'react-icons/fa'
 const Switcher = ({ feedCharacter }) => {
   const [currentComponent, setCurrentComponent] = useState(<Home />)
 
+  const handleRouterChange = (newRouter) => {
+    switch (newRouter) {
+      case 'timer':
+        setCurrentComponent(<Timer />);
+        break;
+      case 'chat':
+        // Pass showRes prop here
+        setCurrentComponent(<Chat onRouterChange={handleRouterChange} showRes />);
+        break;
+      // ... other cases
+
+      default:
+        break;
+    }
+  };
+
   const handleButtonClick = (component) => {
     switch (component) {
       case 'home':
@@ -23,7 +39,7 @@ const Switcher = ({ feedCharacter }) => {
         setCurrentComponent(<Timer />)
         break
       case 'chat':
-        setCurrentComponent(<Chat />)
+        setCurrentComponent(<Chat onRouterChange={handleRouterChange} />)
         break
       case 'feed':
         feedCharacter()
