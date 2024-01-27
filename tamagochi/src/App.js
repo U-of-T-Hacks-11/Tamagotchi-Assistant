@@ -8,13 +8,16 @@ import axios from 'axios';
 import Chat from './pages/Chat';
 
 function App() {
-
-
+  const [currentHealthImageIndex, setCurrentHealthImageIndex] = useState(0);
+  const feedCharacter = () => {
+    console.log(currentHealthImageIndex)
+    setCurrentHealthImageIndex(currentHealthImageIndex === 0 ? 0 : currentHealthImageIndex - 1);
+  }
 
   return (
     <div className='App'>
-      <Switcher />
-      <Character />
+      <Switcher feedCharacter={feedCharacter} />
+      <Character currentHealthImageIndex={currentHealthImageIndex} setCurrentHealthImageIndex={setCurrentHealthImageIndex}/>
       <Chat />
     </div>
   )

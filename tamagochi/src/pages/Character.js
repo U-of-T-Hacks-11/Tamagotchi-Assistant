@@ -5,7 +5,7 @@ import happyLeft from './images/c1.png';
 import Health from './Health'
 
 
-export const Character = () => {
+export const Character = ({currentHealthImageIndex, setCurrentHealthImageIndex}) => {
     const [position, setPosition] = useState(0);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [direction, setDirection] = useState(1); // 1 for moving right, -1 for moving left
@@ -49,7 +49,7 @@ export const Character = () => {
 
     return (
         <div className="character" style={{ left: `${position}px` }}>
-            <Health />
+            <Health currentHealthImageIndex={currentHealthImageIndex} setCurrentHealthImageIndex={setCurrentHealthImageIndex}/>
             <img
                 src={direction === 1 ? happyRight : happyLeft}
                 alt="Character"
