@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './Character.css';
 import happyRight from './images/c10.png';
 import happyLeft from './images/c1.png';
+import Health from './Health'
+
 
 export const Character = () => {
     const [position, setPosition] = useState(0);
@@ -24,17 +26,17 @@ export const Character = () => {
         const characterWidth = 100;
         const intervalId = setInterval(() => {
             // Check if the character has reached the right or left edge of the screen
-            if (position > screenWidth) {
+            if (position + characterWidth > screenWidth) {
                 // Move to the left edge and change direction to -1
                 setPosition(characterWidth);
                 setDirection(-1);
             } else if (position <= 0) {
                 // Move to the right edge and change direction to 1
-                setPosition(screenWidth - characterWidth);
+                setPosition(characterWidth);
                 setDirection(1);
             } else {
                 // Update the position based on the current direction
-                setPosition((prevPosition) => prevPosition + direction * 10);
+                setPosition((prevPosition) => prevPosition + direction);
             }
         }, 100);
 
@@ -45,6 +47,7 @@ export const Character = () => {
 
     return (
         <div className="character" style={{ left: `${position}px` }}>
+            <Health />
             <img
                 src={direction === 1 ? happyRight : happyLeft}
                 alt="Character"
