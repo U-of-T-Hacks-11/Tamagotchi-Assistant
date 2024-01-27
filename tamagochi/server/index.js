@@ -2,6 +2,32 @@
 const express = require('express')
 const { CohereClient } = require('cohere-ai')
 
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://mizrahielai:bUaFocH6zmq3QLFE@tamagotchi.sqyejfv.mongodb.net/?retryWrites=true&w=majority";
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
+
 const app = express()
 var cors = require('cors')
 app.use(cors())
@@ -102,3 +128,65 @@ app.get('/api/chat', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}`)
 })
+
+
+app.post('/api/notes', async (req, res) => {
+    try {
+        console.log(req.headers)
+        const title = req.headers['title']
+        const description = req.headers['description']
+      await client.connect();
+      const db = client.db('tamagotchi'); // Specify your database name
+      const notesCollection = db.collection('notes'); // Specify your collection name
+  
+      // Insert the new note into the database
+      const result = await notesCollection.insertOne({ title, description });
+  
+      // Respond with the inserted note
+    } catch (error) {
+      console.error('Error creating a new note:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
+  // Get all notes
+  app.get('/api/notes', async (req, res) => {
+    try {
+    await client.connect();
+      const db = client.db('tamagotchi'); // Specify your database name
+      const notesCollection = db.collection('notes'); // Specify your collection name
+  
+      // Fetch all notes from the database
+      const notes = await notesCollection.find().toArray();
+      console.log(notes);
+  
+      // Respond with the fetched notes
+      res.json(notes);
+    } catch (error) {
+      console.error('Error fetching notes:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
+  // Delete a note
+  app.delete('/api/notes/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const db = client.db('tamagotchi'); // Specify your database name
+      const notesCollection = db.collection('notes'); // Specify your collection name
+  
+      // Delete the note from the database
+      const result = await notesCollection.deleteOne({ _id: new ObjectId(id) });
+  
+      // Respond with the deletion status
+      if (result.deletedCount > 0) {
+        res.json({ message: 'Note deleted successfully' });
+      } else {
+        res.status(404).json({ message: 'Note not found' });
+      }
+    } catch (error) {
+      console.error('Error deleting a note:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+

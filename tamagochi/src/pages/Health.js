@@ -12,7 +12,6 @@ export const Health = ({ characterPosition , onButtonPress,currentHealthImageInd
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [healthImages] = useState([healthFull, health2, health3, health4, healthDead]);
     const height = 75-(currentHealthImageIndex * 15)
-    console.log(height)
 
 
     useEffect(() => {

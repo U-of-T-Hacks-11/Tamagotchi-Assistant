@@ -16,7 +16,6 @@ function App() {
     <div className='App'>
       <Switcher feedCharacter={feedCharacter} />
       <Character currentHealthImageIndex={currentHealthImageIndex} setCurrentHealthImageIndex={setCurrentHealthImageIndex}/>
-      <Chat />
     </div>
   )
 }
