@@ -4,6 +4,7 @@ import { Group, TextInput, Button } from '@mantine/core'
 import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition'
+import './Chat.css'
 
 export default function Chat({ onRouterChange }) {
   const {
@@ -16,6 +17,8 @@ export default function Chat({ onRouterChange }) {
   const [input, setInput] = useState('')
   const [submitAPI, setSubmitAPI] = useState(0)
   const [chatHistory, setChatHistory] = useState([])
+
+  const [messageList, setMessageList] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +37,17 @@ export default function Chat({ onRouterChange }) {
           }, // Add a header named 'message'
         })
         setMessages(response.data.join(''))
+        console.log(chatHistory)
+
+        // if (messages && showRes) {
+        //   const newMessages = [
+        //     ...messages,
+        //     { text: input, isUser: true },
+        //     { text: messages, isUser: false },
+        //   ]
+        //   setMessageList(newMessages) // Update messages array with user input and bot response
+        // }
+
         setChatHistory([
           ...chatHistory,
           { role: 'USER', message: input },
@@ -63,10 +77,10 @@ export default function Chat({ onRouterChange }) {
         console.log(response.data) // Log the response to check the received data
         setRouter(response.data)
         if (response.data.prediction !== 'Fallback') {
-          onRouterChange(response.data.prediction);
-          setShowRes(false);
+          onRouterChange(response.data.prediction)
+          setShowRes(false)
         } else {
-          setShowRes(true);
+          setShowRes(true)
         }
       } catch (error) {
         console.error('Error fetching data:', error.message)
@@ -105,6 +119,7 @@ export default function Chat({ onRouterChange }) {
             onClick={() => {
               setSubmitAPI(submitAPI + 1)
               setInput(input + transcript)
+              resetTranscript()
             }}
           >
             Submit
@@ -112,8 +127,33 @@ export default function Chat({ onRouterChange }) {
           {/* <h1>{router}</h1> */}
           {/* <h1>{typeof router === 'object' ? router.prediction : router}</h1> */}
 
-
-          {showRes ? <p>{messages}</p> : null}
+          <div id='div1' style={{ height: '500px', position: 'relative' }}>
+            <div
+              id='div2'
+              style={{
+                maxHeight: '100%',
+                overflow: 'auto',
+                border: '1px solid red',
+              }}
+            >
+              <div
+                id='div3'
+                style={{ height: '1500px', border: '5px solid yellow' }}
+              >
+                {chatHistory.map((entry, index) => (
+                  <div
+                    key={index}
+                    className={`${
+                      entry.role === 'USER' ? 'user' : 'assistant'
+                    }`}
+                  >
+                    <p>{entry.message}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          {/* {showRes ? <p>{messages}</p> : null} */}
         </Group>
       </div>
     </div>
