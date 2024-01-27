@@ -1,6 +1,6 @@
 .character {
     position: absolute;
-    bottom: 0; /* Adjust as needed */
+    bottom: 5vh; /* Adjust as needed */
     transition: left 0.5s ease-in-out; /* Smooth transition for the character movement */
 }
   
