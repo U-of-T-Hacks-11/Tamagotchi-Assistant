@@ -22,7 +22,6 @@ const Switcher = ({feedCharacter}) => {
         setCurrentComponent(<Timer />);
         break;
       case 'feed':
-        setCurrentComponent(<Feed />);
         feedCharacter();
         break;
       default:
