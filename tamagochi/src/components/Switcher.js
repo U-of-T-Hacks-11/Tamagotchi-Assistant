@@ -4,10 +4,10 @@ import Home from '../pages/Home'
 import Timer from '../pages/Timer'
 import Feed from '../pages/Feed'
 import hungerBar from '../pages/images/hungerBar.png'
-import { FaHome, FaHourglassHalf } from 'react-icons/fa'
+import { FaHome, FaHourglassHalf, FaSave } from "react-icons/fa";
 import { BsChatLeftTextFill } from "react-icons/bs";
+import Notes from '../pages/Notes';
 import './Switcher.css';
-
 // Sample components
 // const ComponentA = () => <div>Component A</div>;
 // const ComponentB = () => <div>Component B</div>;
@@ -15,6 +15,22 @@ import './Switcher.css';
 
 const Switcher = ({ feedCharacter }) => {
   const [currentComponent, setCurrentComponent] = useState(<Home />)
+
+  const handleRouterChange = (newRouter) => {
+    switch (newRouter) {
+      case 'timer':
+        setCurrentComponent(<Timer />);
+        break;
+      case 'chat':
+        // Pass showRes prop here
+        setCurrentComponent(<Chat onRouterChange={handleRouterChange} showRes />);
+        break;
+      // ... other cases
+
+      default:
+        break;
+    }
+  };
 
   const handleButtonClick = (component) => {
     switch (component) {
@@ -25,12 +41,14 @@ const Switcher = ({ feedCharacter }) => {
         setCurrentComponent(<Timer />)
         break
       case 'chat':
-        setCurrentComponent(<Chat />)
+        setCurrentComponent(<Chat onRouterChange={handleRouterChange} />)
         break
       case 'feed':
-        feedCharacter()
-        break
-
+        feedCharacter();
+        break;
+      case 'notes':
+        setCurrentComponent(<Notes />);
+        break;
       default:
         setCurrentComponent(null)
     }
@@ -52,8 +70,8 @@ const Switcher = ({ feedCharacter }) => {
           <button className = 'button-icon' onClick={() => handleButtonClick('chat')}>
             <BsChatLeftTextFill />
           </button>
-          <button className = 'button-icon' onClick={() => handleButtonClick('chat')}>
-            <BsChatLeftTextFill />
+          <button onClick={() => handleButtonClick('notes')}>
+            <FaSave />
           </button>
         </div>
         <button
