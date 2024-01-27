@@ -22,6 +22,7 @@ export default function Chat() {
       try {
         console.log(input, chatHistory);
         console.log('Fetching data');
+        setInput(input )
         const response = await axios.get('http://localhost:3001/api/chat', {
           headers: { message: input, chatHistory: JSON.stringify(chatHistory).replace(/[^\x00-\x7F]/g, "") }, // Add a header named 'message'
         });
@@ -56,11 +57,11 @@ export default function Chat() {
    <div>
       <Group style={{ position: 'absolute', height: '5vh', width: '100%' }}>
         <TextInput
-          value={input }
+          value={transcript }
           onChange={(event) => setInput(event.currentTarget.value)}
           placeholder="Ask me a question!"
         />
-        <Button onClick={() => {setSubmitAPI(submitAPI + 1); }}>Submit</Button>
+        <Button onClick={() => {setSubmitAPI(submitAPI + 1); setInput(transcript) }}>Submit</Button>
         <div>{messages}</div>
       </Group>
     </div>
