@@ -7,11 +7,10 @@ import health4 from './images/health4.png';
 import healthDead from './images/healthDead.png';
 
 
-export const Health = ({ characterPosition }) => {
-    const [position] = useState(0); // Start position outside the screen
+export const Health = ({ characterPosition , onButtonPress,currentHealthImageIndex, setCurrentHealthImageIndex }) => {
+    //const [position] = useState(0); // Start position outside the screen
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [healthImages] = useState([healthFull, health2, health3, health4, healthDead]);
-    const [currentHealthImageIndex, setCurrentHealthImageIndex] = useState(0);
 
     useEffect(() => {
         const handleResize = () => {
@@ -24,21 +23,18 @@ export const Health = ({ characterPosition }) => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-
     useEffect(() => {
-        //const healthBarWidth = 100; // Set the width of your health bar image
-
         const intervalId = setInterval(() => {
-            setCurrentHealthImageIndex((prevIndex) => (prevIndex + 1) % healthImages.length);
-        }, 10000);
-
+            setCurrentHealthImageIndex((prevIndex) => (prevIndex < 4 ? prevIndex + 1 : 4));
+        }, 2000);
+    
         return () => {
             clearInterval(intervalId);
         };
-    }, [healthImages]);
-
+    }, [currentHealthImageIndex, healthImages]);
+    
     return (
-        <div className="health" style={{ left: `${position}px` }}>
+        <div className="health" style={{ left: `${characterPosition}px` }}>
             <img src={healthImages[currentHealthImageIndex]} alt="health" />
         </div>
     );

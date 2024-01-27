@@ -2,14 +2,18 @@ import React, { useState } from 'react';
 import Chat from '../pages/Chat';
 import Home from '../pages/Home';
 import Timer from '../pages/Timer';
+import Feed from '../pages/Feed';
+import hungerBar from '../pages/images/hungerBar.png';
+import { FaHome, FaHourglassHalf } from "react-icons/fa";
 
 // Sample components
 // const ComponentA = () => <div>Component A</div>;
 // const ComponentB = () => <div>Component B</div>;
 // const ComponentC = () => <div>Component C</div>;
 
-const Switcher = () => {
+const Switcher = ({feedCharacter}) => {
   const [currentComponent, setCurrentComponent] = useState(<Home />);
+
 
   const handleButtonClick = (component) => {
     switch (component) {
@@ -19,8 +23,8 @@ const Switcher = () => {
       case 'timer':
         setCurrentComponent(<Timer />);
         break;
-      case 'chat':
-        setCurrentComponent(<Chat />);
+      case 'feed':
+        feedCharacter();
         break;
       default:
         setCurrentComponent(null);
@@ -30,9 +34,12 @@ const Switcher = () => {
   return (
     <div className="App">
       <div>
-        <button onClick={() => handleButtonClick('home')}>Home</button>
-        <button onClick={() => handleButtonClick('timer')}>Timer</button>
-        <button onClick={() => handleButtonClick('chat')}>Chat</button>
+        <button onClick={() => handleButtonClick('home')}><FaHome /></button>
+        <button onClick={() => handleButtonClick('timer')}><FaHourglassHalf /></button>
+        <button 
+          onClick={() => handleButtonClick('feed')}
+          style={{ position: 'absolute', bottom: 20, right: 10 , fontSize: '18px', padding: '8px'}}
+          >feed</button>
       </div>
       <div>
         {currentComponent}

@@ -12,10 +12,10 @@ export default function Chat() {
     resetTranscript,
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition()
-  const [messages, setMessages] = useState('')
-  const [input, setInput] = useState('')
-  const [submitAPI, setSubmitAPI] = useState(0)
-  const [chatHistory, setChatHistory] = useState([])
+  const [messages, setMessages] = useState('');
+  const [input, setInput] = useState('');
+  const [submitAPI, setSubmitAPI] = useState(0);
+  const [chatHistory, setChatHistory] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,33 +46,9 @@ export default function Chat() {
     if (submitAPI > 0) {
       fetchData()
     }
-  }, [submitAPI])
+  }, [submitAPI]);
 
-
-
-  
-  const [router, setRouter] = useState('')
-
-  useEffect(() => {
-    const changeFeature = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/api/router', {
-          headers: {
-            message: input
-          },
-        })
-        setRouter(response.data.join(''))
-       
-      } catch (error) {
-        console.error('Error fetching data:', error.message)
-      }
-    }
-    if (submitAPI > 0) {
-      changeFeature()
-    }
-  }, [submitAPI])
-
-  console.log(chatHistory)
+  console.log(chatHistory);
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>
   }
