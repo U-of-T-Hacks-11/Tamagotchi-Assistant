@@ -9,8 +9,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <MantineProvider>
-    <div style={{ width: '350px', height: '600px' }}>
-      <App />
+    <div style={{ width: '350px', height: '560px', padding: '20px' }}>
+      <div style={{ backgroundColor: '#B7CAB1'}}>
+        <App />
+      </div>
     </div>
     </MantineProvider >
   </React.StrictMode>
