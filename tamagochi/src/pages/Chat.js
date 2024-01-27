@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Group, TextInput, Button } from '@mantine/core';
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from 'react-speech-recognition'
 
 export default function Chat() {
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition()
   const [messages, setMessages] = useState('');
   const [input, setInput] = useState('');
   const [submitAPI, setSubmitAPI] = useState(0);
@@ -29,9 +38,22 @@ export default function Chat() {
   }, [submitAPI]);
 
   console.log(chatHistory);
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>
+  }
 
   return (
     <div>
+      <h1>Chat</h1>
+
+      <p1>voice</p1>
+
+      <p>Microphone: {listening ? 'on' : 'off'}</p>
+      <button onClick={SpeechRecognition.startListening}>Start</button>
+      <button onClick={SpeechRecognition.stopListening}>Stop</button>
+      <button onClick={resetTranscript}>Reset</button>
+      <p>{transcript}</p>
+   <div>
       <Group style={{ position: 'absolute', height: '5vh', width: '100%' }}>
         <TextInput
           value={input }
@@ -42,5 +64,6 @@ export default function Chat() {
         <div>{messages}</div>
       </Group>
     </div>
-  );
+    </div>
+  )
 }
