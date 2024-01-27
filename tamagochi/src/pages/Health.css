@@ -1,9 +1,11 @@
 .health {
     position: absolute;
-    bottom: 85px; /* Adjust as needed */
-    transition: left 0.5s ease-in-out; /* Smooth transition for the character movement */
+    bottom: 85px;
+    /* Adjust as needed */
+    transition: left 0.5s ease-in-out;
+    /* Smooth transition for the character movement */
 }
-  
+
 .health img {
-    width: 100px; /* Adjust the size of your health image */
+    width: 75px; /* Adjust the size of your character image */
 }

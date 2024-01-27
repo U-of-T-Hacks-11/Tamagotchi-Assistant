@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './Character.css';
 import happyRight from './images/c10.png';
 import happyLeft from './images/c1.png';
+import Health from './Health'
+
 
 export const Character = () => {
     const [position, setPosition] = useState(0);
@@ -45,6 +47,7 @@ export const Character = () => {
 
     return (
         <div className="character" style={{ left: `${position}px` }}>
+            <Health />
             <img
                 src={direction === 1 ? happyRight : happyLeft}
                 alt="Character"

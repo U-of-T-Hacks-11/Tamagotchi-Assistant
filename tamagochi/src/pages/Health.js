@@ -1,53 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import './Health.css';
 import healthFull from './images/healthFull.png';
+import health2 from './images/health2.png';
+import health3 from './images/health3.png';
+import health4 from './images/health4.png';
+import healthDead from './images/healthDead.png';
 
-export const Health = () => {
-  const [position, setPosition] = useState(0); // Start position outside the screen
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [direction, setDirection] = useState(1); // 1 for moving right, -1 for moving left
 
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
+export const Health = ({ characterPosition }) => {
+    const [position] = useState(0); // Start position outside the screen
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [healthImages] = useState([healthFull, health2, health3, health4, healthDead]);
+    const [currentHealthImageIndex, setCurrentHealthImageIndex] = useState(0);
 
-    window.addEventListener('resize', handleResize);
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+        window.addEventListener('resize', handleResize);
 
-  useEffect(() => {
-    const healthBarWidth = 100; // Set the width of your health bar image
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
-    const intervalId = setInterval(() => {
-      // Check if the health bar has reached the right or left edge of the screen
-      if (position + healthBarWidth > screenWidth) {
-        // Move to the left edge and change direction to -1
-        setPosition(healthBarWidth);
-        setDirection(-1);
-      } else if (position <= 0) {
-        // Move to the right edge and change direction to 1
-        setPosition(healthBarWidth);
-        setDirection(1);
-      } else {
-        // Update the position based on the current direction
-        setPosition((prevPosition) => prevPosition + direction);
-      }
-    }, 100);
+    useEffect(() => {
+        //const healthBarWidth = 100; // Set the width of your health bar image
 
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [position, screenWidth, direction]);
+        const intervalId = setInterval(() => {
+            setCurrentHealthImageIndex((prevIndex) => (prevIndex + 1) % healthImages.length);
+        }, 10000);
 
-  return (
-    <div className="health" style={{ left: `${position}px` }}>
-      <img src={healthFull} alt="health" />
-    </div>
-  );
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [healthImages]);
+
+    return (
+        <div className="health" style={{ left: `${position}px` }}>
+            <img src={healthImages[currentHealthImageIndex]} alt="health" />
+        </div>
+    );
 };
 
 export default Health;

@@ -1,7 +1,6 @@
 import './App.css'
 import Switcher from './components/Switcher'
 import Character from './pages/Character'
-import Health from './pages/Health'
 
 function App() {
   return (
@@ -9,7 +8,6 @@ function App() {
       {/* <img src={happyRight} alt='' /> */}
       <Switcher />
       <Character />
-      <Health />
     </div>
   )
 }
