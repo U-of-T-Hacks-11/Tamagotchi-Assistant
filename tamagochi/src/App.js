@@ -1,13 +1,15 @@
 import './App.css'
 import Switcher from './components/Switcher'
 import Character from './pages/Character'
-import happyRight from './pages/images/c10.png'
+import Health from './pages/Health'
+
 function App() {
   return (
     <div className='App'>
       {/* <img src={happyRight} alt='' /> */}
       <Switcher />
       <Character />
+      <Health />
     </div>
   )
 }
