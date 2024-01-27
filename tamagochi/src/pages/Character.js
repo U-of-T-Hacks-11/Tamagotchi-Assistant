@@ -3,6 +3,7 @@ import './Character.css';
 import happyRight from './images/c10.png';
 import happyLeft from './images/c1.png';
 import stop from './images/c6.png';
+import dead from './images/c9.png';
 import Health from './Health'
 
 
@@ -55,6 +56,15 @@ export const Character = ({currentHealthImageIndex, setCurrentHealthImageIndex})
                     setDirection(newDirection);
                 }
             }
+
+            if (currentHealthImageIndex === 4) {
+                // Set a different image when health is dead
+                // You can replace 'newDeadImage' with the actual image you want to use
+                // Example: const newDeadImage = require('./images/newDeadImage.png');
+                //const newDeadImage = dead;
+                return dead;
+            }
+      
             //setPosition((prevPosition) => prevPosition + direction );
             if (newPosition >= 0 && newPosition + characterWidth <= screenWidth) {
                 setPosition(newPosition);
@@ -74,7 +84,7 @@ export const Character = ({currentHealthImageIndex, setCurrentHealthImageIndex})
           clearInterval(intervalId);
           window.removeEventListener('resize', handleResize);
         };
-      }, [position, screenWidth, direction, isStopped]);
+      }, [position, screenWidth, direction, isStopped, currentHealthImageIndex]);
 
     const characterImage = isStopped ? stop : direction === 1 ? happyRight : happyLeft;
 
