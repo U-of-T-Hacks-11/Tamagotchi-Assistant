@@ -1,0 +1,9 @@
+.character {
+    position: absolute;
+    bottom: 0; /* Adjust as needed */
+    transition: left 0.5s ease-in-out; /* Smooth transition for the character movement */
+}
+  
+.character img {
+    width: 75px; /* Adjust the size of your character image */
+}

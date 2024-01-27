@@ -1,11 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-
+import Character from './pages/Character';
+import happyRight from './pages/images/c10.png';
 function App() {
   return (
     <div className="App">
+      <img src={happyRight} alt="" />
+      <Character />
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
