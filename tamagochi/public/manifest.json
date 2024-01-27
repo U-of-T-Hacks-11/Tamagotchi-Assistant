@@ -1,10 +1,10 @@
 {
   "manifest_version": 2,
-  "name": "Your Extension",
+  "name": "gotchi.ai",
   "version": "1.0",
-  "description": "Your extension description",
+  "description": "Study better with your personal AI Tamagotchi assistant",
   "browser_action": {
-    "default_icon": "logo192.png",
+    "default_icon": "Subject.png",
     "default_popup": "index.html"
   },
   
