@@ -31,7 +31,7 @@ export const Character = ({currentHealthImageIndex, setCurrentHealthImageIndex})
     
         const moveCharacter = () => {
           // Randomly decide whether to stop or move
-          const shouldStop = Math.random() < 0.2; // 10% chance to stop
+          const shouldStop = Math.random() < 0.2; // 20% chance to stop
     
           if (shouldStop) {
             setIsStopped(true);
@@ -50,7 +50,7 @@ export const Character = ({currentHealthImageIndex, setCurrentHealthImageIndex})
 
             if (closeToEdge) {
                 // Higher chance to change direction when close to the edge
-                const changeDirection = Math.random() < 0.9; // 90% chance
+                const changeDirection = Math.random() < 0.8; // 90% chance
                 if (changeDirection) {
                     const newDirection = Math.random() < 0.5 ? 1 : -1;
                     setDirection(newDirection);

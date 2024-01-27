@@ -1,10 +1,15 @@
 import './Home.css';
+import React from 'react';
+import logo from '../pages/images/tamagochiLogo.png';
+
 export default function Home(){
     return(
         <div>
-            <h1>Home</h1>
-            <h1 className='words-heading'>Meet Your</h1>
-            <h1 className="tamagochi-heading">Tamagochi</h1>
+            <h1 className='section-heading'>Home</h1>
+            <div className="container">
+                <h1 className='title-heading'>Meet Your </h1>
+                <img src={logo} alt="Header Image" />
+            </div>
         </div>
     )
 }
