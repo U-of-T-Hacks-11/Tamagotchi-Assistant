@@ -15,7 +15,7 @@ function App() {
       {/* <img src={happyRight} alt='' /> */}
       <Switcher />
       <Character />
-      <Chat />
+      {/* <Chat /> */}
     </div>
   )
 }
