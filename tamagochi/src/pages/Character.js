@@ -4,10 +4,9 @@ import happyRight from './images/c10.png';
 import happyLeft from './images/c1.png';
 import stop from './images/c6.png';
 import dead from './images/c9.png';
-import Health from './Health'
+import Health from './Health';
 
-
-export const Character = ({currentHealthImageIndex, setCurrentHealthImageIndex}) => {
+export const Character = ({ currentHealthImageIndex, setCurrentHealthImageIndex }) => {
     const [position, setPosition] = useState(0);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [direction, setDirection] = useState(1); // 1 for moving right, -1 for moving left
@@ -26,71 +25,42 @@ export const Character = ({currentHealthImageIndex, setCurrentHealthImageIndex})
     }, []);
 
     useEffect(() => {
-        const characterWidth = 100;
-        const stopPosition = screenWidth - 100;
-    
-        const moveCharacter = () => {
-          // Randomly decide whether to stop or move
-          const shouldStop = Math.random() < 0.2; // 20% chance to stop
-    
-          if (shouldStop) {
-            setIsStopped(true);
-            setTimeout(() => {
-              // After stopping for a few seconds, change direction randomly
-              const newDirection = Math.random() < 0.5 ? 1 : -1;
-              setDirection(newDirection);
-              setIsStopped(false);
-            }, 500);  
-          } else {
-            // Update the position based on the current direction
-            const newPosition = position + direction * 20;
-            
-            // Check if the character is close to the edge
-            const closeToEdge = newPosition < 50 || newPosition > stopPosition - 50;
+        const characterWidth = 150;
+        const minPosition = 0;
+        const maxPosition = screenWidth - characterWidth;
 
-            if (closeToEdge) {
-                // Higher chance to change direction when close to the edge
-                const changeDirection = Math.random() < 0.8; // 90% chance
-                if (changeDirection) {
-                    const newDirection = Math.random() < 0.5 ? 1 : -1;
-                    setDirection(newDirection);
-                }
+        const intervalId = setInterval(() => {
+            // Check if the character has reached the right or left edge of the screen
+            if (direction === 1 && position + characterWidth > maxPosition) {
+                // Move to the left edge and change direction to -1
+                setPosition(maxPosition - characterWidth);
+                setDirection(-1);
+            } else if (direction === -1 && position < minPosition) {
+                // Move to the right edge and change direction to 1
+                setPosition(minPosition);
+                setDirection(1);
+            } else {
+                // Update the position based on the current direction
+                setPosition((prevPosition) => prevPosition + direction * 20);
             }
+        }, 500);
 
-            if (currentHealthImageIndex === 4) {
-                return dead;
-            }
-      
-            //setPosition((prevPosition) => prevPosition + direction );
-            if (newPosition >= 0 && newPosition + characterWidth <= screenWidth) {
-                setPosition(newPosition);
-            }   
-          }
-        }
-    
-        const intervalId = setInterval(moveCharacter, 700);
-    
         const handleResize = () => {
-          setScreenWidth(window.innerWidth);
+            setScreenWidth(window.innerWidth);
         };
-    
-        window.addEventListener('resize', handleResize);
-    
-        return () => {
-          clearInterval(intervalId);
-          window.removeEventListener('resize', handleResize);
-        };
-      }, [position, screenWidth, direction, isStopped, currentHealthImageIndex]);
 
-    const characterImage = isStopped ? stop : direction === 1 ? happyRight : happyLeft;
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            clearInterval(intervalId);
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [position, screenWidth, direction, currentHealthImageIndex]);
 
     return (
-        <div className="character" style={{ left: `${position}px` }}>
-            <Health currentHealthImageIndex={currentHealthImageIndex} setCurrentHealthImageIndex={setCurrentHealthImageIndex}/>
-            <img
-                src={characterImage}
-                alt="Character"
-            />
+        <div className="character" style={{ left: `${position+75}px` }}>
+            <Health currentHealthImageIndex={currentHealthImageIndex} setCurrentHealthImageIndex={setCurrentHealthImageIndex} />
+            <img src={direction === 1 ? happyRight : happyLeft} alt="Character" />
         </div>
     );
 };
