@@ -7,5 +7,6 @@
 }
 
 .health img {
-    width: 75px; /* Adjust the size of your character image */
+    height: 40px;
+    width: 75px; /* Adjust the size of your healthbar image */
 }
