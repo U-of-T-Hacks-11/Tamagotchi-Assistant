@@ -73,6 +73,7 @@ export const Health = ({ characterPosition, onButtonPress, currentHealthImageInd
     return (
         <div className="health" style={{ left: `${characterPosition}px` }}>
             <img src={healthImages[currentHealthImageIndex]} width={height * 30} height={30} alt="health" />
+
         </div>
     );
 };
