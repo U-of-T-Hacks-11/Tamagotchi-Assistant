@@ -67,8 +67,8 @@ const Switcher = ({ feedCharacter }) => {
           onClick={() => handleButtonClick('feed')}
           style={{
             position: 'absolute',
-            bottom: 20,
-            right: 10,
+            bottom: '30px',
+            right: '30px',
             fontSize: '18px',
             padding: '8px',
             backgroundColor: 'rgba(0, 0, 0, 0.0)',
