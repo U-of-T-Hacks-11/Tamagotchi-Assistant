@@ -38,8 +38,20 @@ const Switcher = ({feedCharacter}) => {
         <button onClick={() => handleButtonClick('timer')}><FaHourglassHalf /></button>
         <button 
           onClick={() => handleButtonClick('feed')}
-          style={{ position: 'absolute', bottom: 20, right: 10 , fontSize: '18px', padding: '8px'}}
-          >feed</button>
+          style={{ 
+            position: 'absolute', 
+            bottom: 20, 
+            right: 10, 
+            fontSize: '18px', 
+            padding: '8px',
+            backgroundColor: 'rgba(0, 0, 0, 0.0)',
+            borderRadius: 10,
+            borderColor: 'rgba(14, 51, 19, 0.74)',
+            borderWidth: '4px',
+          }}
+        >
+          <img src={hungerBar} alt="Hunger Bar" style={{ width: '50px', height: '50px'}} />
+        </button>
       </div>
       <div>
         {currentComponent}
