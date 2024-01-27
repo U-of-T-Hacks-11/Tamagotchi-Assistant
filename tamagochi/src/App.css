@@ -5,17 +5,4 @@ body {
   height: 100vh;
 }
 
-#root {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  height: 100%;
-  padding: 16px; /* Add some padding to give space from the edges */
-}
 
-.App {
-  background-color: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-}
