@@ -4,3 +4,8 @@ body {
   padding: 0;
   height: 100vh;
 }
+
+.size {
+  height: 560px;
+  width: 350px;
+}
