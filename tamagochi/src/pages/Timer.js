@@ -58,12 +58,11 @@ const Timer = () => {
     if (currentTimer === "work") {
       setCurrentTimer("break");
       setMinutes(5);
-      setSeconds(0);
     } else {
       setCurrentTimer("work");
       setMinutes(25);
-      setSeconds(0);
     }
+    setSeconds(0);
     setIsRunning(false);
   };
 
@@ -82,7 +81,7 @@ const Timer = () => {
             },
           }}
         >
-          <h1 style={{ fontFamily: 'monospace', textShadow: '1px 1px 2px rgba(14, 51, 19, 0.74), 0 0 1em rgba(14, 51, 19, 0.74), 0 0 0.2em rgba(14, 51, 19, 0.74)' }}>
+          <h1 style={{ fontFamily: 'monospace', textShadow: '1px 1px 2px rgba(42, 90, 49, 0.74), 0 0 1em rgba(42, 90, 49, 0.74), 0 0 0.2em rgba(42, 90, 49, 0.74)' }}>
             {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
           </h1>
         </Button>
