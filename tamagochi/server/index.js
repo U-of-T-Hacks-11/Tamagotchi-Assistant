@@ -39,11 +39,11 @@ const cohere = new CohereClient({
 })
 
 const examples = [
-  { text: 'Start a 25-minute pomodoro timer', label: 'Start timer' },
-  { text: 'Set a timer for 30 minutes', label: 'Start timer' },
-  { text: 'Begin a 10-minute break', label: 'Start timer' },
-  { text: 'Take a short break', label: 'Start timer' },
-  { text: 'Start a new work session', label: 'Start timer' },
+  { text: 'Start a 25-minute pomodoro timer', label: 'timer' },
+  { text: 'Set a timer for 30 minutes', label: 'timer' },
+  { text: 'Begin a 10-minute break', label: 'timer' },
+  { text: 'Take a short break', label: 'timer' },
+  { text: 'Start a new work session', label: 'timer' },
   { text: 'Create a note for the meeting', label: 'Take notes' },
   { text: 'Take notes on the presentation', label: 'Take notes' },
   { text: 'Jot down key points', label: 'Take notes' },
@@ -56,20 +56,32 @@ const examples = [
 ]
 app.get('/api/router', async (req, res) => {
   try {
-    const userMessage = req.headers['message'];
+    const message = req.headers['message'];
     
     const response = await cohere.classify({
-      inputs: [userMessage],
+      inputs: [message],
       examples: examples,
     });
 
-    console.log(response);
+    console.log(response.classifications[0].prediction, response.classifications[0].confidence);
 
-    if (response.classifications[0].confidence > 0.1) {
-      res.json(response.classifications[0].prediction);
+    // if (response.classifications[0].confidence > 0.7) {
+    //   res.json(response.classifications[0].prediction);
+    // } else {
+    //   res.json('Fallback');
+    // }
+
+    if (response.classifications[0].confidence > 0.88) {
+      res.json({
+        prediction: response.classifications[0].prediction
+        // confidence: response.classifications[0].confidence,
+      });
     } else {
-      res.json('Fallback prediction'); // Provide a fallback value if confidence is too low
+      // res.json({ prediction: 'Fallback', confidence: 0 });
+      res.json({ prediction: 'Fallback'});
+
     }
+    
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -80,18 +92,11 @@ app.get('/api/chat', async (req, res) => {
   try {
     // Extract user's message from headers
     const userMessage =
-      req.headers['message'] + 'keep your response under 15 words' ||
+      req.headers['message'] + ' keep your response under 15 words' ||
       'Default message if header is not provided'
 
-    // ;(async () => {
-    //   const response = await cohere.classify({
-    //     inputs: [userMessage],
-    //     examples: examples,
-    //   })
-    //   console.log(response)
-    // })()
-
     console.log(req.headers)
+    console.log(userMessage)
     console.log(req.headers['chathistory'])
     const parsedChatHistory = JSON.parse(req.headers['chathistory'])
     console.log('CHAT:' + parsedChatHistory)
