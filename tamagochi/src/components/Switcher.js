@@ -9,8 +9,9 @@ import Feed from '../pages/Feed';
 // const ComponentB = () => <div>Component B</div>;
 // const ComponentC = () => <div>Component C</div>;
 
-const Switcher = () => {
+const Switcher = ({feedCharacter}) => {
   const [currentComponent, setCurrentComponent] = useState(<Home />);
+
 
   const handleButtonClick = (component) => {
     switch (component) {
@@ -25,6 +26,7 @@ const Switcher = () => {
         break;
       case 'feed':
         setCurrentComponent(<Feed />);
+        feedCharacter();
         break;
       default:
         setCurrentComponent(null);

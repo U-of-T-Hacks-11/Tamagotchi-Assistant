@@ -11,7 +11,7 @@ export default function Chat() {
     listening,
     resetTranscript,
     browserSupportsSpeechRecognition,
-  } = useSpeechRecognition()
+  } = useSpeechRecognition({continuous: true})
   const [messages, setMessages] = useState('');
   const [input, setInput] = useState('');
   const [submitAPI, setSubmitAPI] = useState(0);
@@ -38,7 +38,6 @@ export default function Chat() {
     }
   }, [submitAPI]);
 
-  console.log(chatHistory);
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>
   }
