@@ -24,19 +24,21 @@ export const Character = () => {
 
     useEffect(() => {
         const characterWidth = 100;
+        const stopPosition = screenWidth - 20;
+
         const intervalId = setInterval(() => {
             // Check if the character has reached the right or left edge of the screen
-            if (position + characterWidth > screenWidth) {
+            if (direction === 1 && position + characterWidth > screenWidth) {
                 // Move to the left edge and change direction to -1
-                setPosition(characterWidth);
+                setPosition(stopPosition - characterWidth);
                 setDirection(-1);
-            } else if (position <= 0) {
+            } else if (direction === -1 && position <= 0) {
                 // Move to the right edge and change direction to 1
                 setPosition(characterWidth);
                 setDirection(1);
             } else {
                 // Update the position based on the current direction
-                setPosition((prevPosition) => prevPosition + direction);
+                setPosition((prevPosition) => prevPosition + direction*10);
             }
         }, 100);
 

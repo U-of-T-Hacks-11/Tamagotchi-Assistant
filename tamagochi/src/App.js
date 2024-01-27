@@ -1,11 +1,11 @@
 import './App.css'
 import Switcher from './components/Switcher'
 import Character from './pages/Character'
+import Feed from './pages/Feed'
 
 function App() {
   return (
     <div className='App'>
-      {/* <img src={happyRight} alt='' /> */}
       <Switcher />
       <Character />
     </div>
