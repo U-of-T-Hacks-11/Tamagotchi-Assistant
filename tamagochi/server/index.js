@@ -28,26 +28,27 @@ const examples = [
   { text: 'Create a checklist', label: 'Take notes' },
   { text: 'Write down important details', label: 'Take notes' },
 ]
-
 app.get('/api/router', async (req, res) => {
   try {
-    const userMessage = req.headers['message']
-    ;(async () => {
-      const response = await cohere.classify({
-        inputs: [userMessage],
-        examples: examples,
-      })
-      // console.log(await response)
-      console.log(await response)
-    })()
+    const userMessage = req.headers['message'];
+    
+    const response = await cohere.classify({
+      inputs: [userMessage],
+      examples: examples,
+    });
 
-    if (response.classifications.confidence > 0.1) {
-      res.json(response.classifications.prediction)
+    console.log(response);
+
+    if (response.classifications[0].confidence > 0.1) {
+      res.json(response.classifications[0].prediction);
+    } else {
+      res.json('Fallback prediction'); // Provide a fallback value if confidence is too low
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
-})
+});
 
 app.get('/api/chat', async (req, res) => {
   try {
