@@ -37,7 +37,7 @@ app.get('/api/router', async (req, res) => {
       examples: examples,
     });
 
-    console.log(response);
+    console.log(response.classifications);
 
     if (response.classifications[0].confidence > 0.1) {
       res.json(response.classifications[0].prediction);
