@@ -11,18 +11,10 @@ export const Health = ({ characterPosition , onButtonPress,currentHealthImageInd
     //const [position] = useState(0); // Start position outside the screen
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [healthImages] = useState([healthFull, health2, health3, health4, healthDead]);
+    const height = 75-(currentHealthImageIndex * 15)
+    console.log(height)
 
-    useEffect(() => {
-        const handleResize = () => {
-            setScreenWidth(window.innerWidth);
-        };
 
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
     useEffect(() => {
         const intervalId = setInterval(() => {
             setCurrentHealthImageIndex((prevIndex) => (prevIndex < 4 ? prevIndex + 1 : 4));
@@ -35,7 +27,7 @@ export const Health = ({ characterPosition , onButtonPress,currentHealthImageInd
     
     return (
         <div className="health" style={{ left: `${characterPosition}px` }}>
-            <img src={healthImages[currentHealthImageIndex]} alt="health" />
+            <img src={healthImages[currentHealthImageIndex]}width={height*30} height={30} alt="health" />
         </div>
     );
 };
