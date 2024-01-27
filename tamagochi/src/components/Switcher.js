@@ -3,6 +3,7 @@ import Chat from '../pages/Chat';
 import Home from '../pages/Home';
 import Timer from '../pages/Timer';
 import Feed from '../pages/Feed';
+import { FaHome } from "react-icons/fa";
 
 // Sample components
 // const ComponentA = () => <div>Component A</div>;
@@ -34,7 +35,7 @@ const Switcher = () => {
   return (
     <div className="App">
       <div>
-        <button onClick={() => handleButtonClick('home')}>Home</button>
+        <button onClick={() => handleButtonClick('home')}><FaHome /></button>
         <button onClick={() => handleButtonClick('timer')}>Timer</button>
         <button onClick={() => handleButtonClick('chat')}>Chat</button>
         <button 
