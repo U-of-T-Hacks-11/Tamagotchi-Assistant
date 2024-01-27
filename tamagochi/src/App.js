@@ -17,7 +17,6 @@ function App() {
         <Character currentHealthImageIndex={currentHealthImageIndex} setCurrentHealthImageIndex={setCurrentHealthImageIndex}/>
       </div>
     </main>
-    
   )
 }
 
