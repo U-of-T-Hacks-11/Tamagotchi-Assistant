@@ -10,7 +10,7 @@ root.render(
   <React.StrictMode>
     <MantineProvider>
     <div style={{ width: '350px', height: '560px', padding: '20px' }}>
-      <div style={{ backgroundColor: '#B7CAB1'}}>
+      <div style={{ backgroundColor: '#9ca499'}}>
         <App />
       </div>
     </div>

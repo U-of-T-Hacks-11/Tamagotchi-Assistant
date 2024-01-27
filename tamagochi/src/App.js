@@ -18,7 +18,7 @@ function App() {
     </div>
 =======
     <main>
-      <div className='App'>
+      <div className='size'>
         <Switcher feedCharacter={feedCharacter} />
         <Character currentHealthImageIndex={currentHealthImageIndex} setCurrentHealthImageIndex={setCurrentHealthImageIndex}/>
       </div>
