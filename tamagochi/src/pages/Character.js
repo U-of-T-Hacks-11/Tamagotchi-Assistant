@@ -26,11 +26,11 @@ export const Character = ({currentHealthImageIndex, setCurrentHealthImageIndex})
 
     useEffect(() => {
         const characterWidth = 100;
-        const stopPosition = screenWidth - 40;
+        const stopPosition = screenWidth - 100;
     
         const moveCharacter = () => {
           // Randomly decide whether to stop or move
-          const shouldStop = Math.random() < 0.1; // 20% chance to stop
+          const shouldStop = Math.random() < 0.2; // 10% chance to stop
     
           if (shouldStop) {
             setIsStopped(true);
@@ -39,7 +39,7 @@ export const Character = ({currentHealthImageIndex, setCurrentHealthImageIndex})
               const newDirection = Math.random() < 0.5 ? 1 : -1;
               setDirection(newDirection);
               setIsStopped(false);
-            }, 5000);  
+            }, 500);  
           } else {
             // Update the position based on the current direction
             const newPosition = position + direction * 20;
@@ -49,7 +49,7 @@ export const Character = ({currentHealthImageIndex, setCurrentHealthImageIndex})
 
             if (closeToEdge) {
                 // Higher chance to change direction when close to the edge
-                const changeDirection = Math.random() < 0.8; // 80% chance
+                const changeDirection = Math.random() < 0.9; // 90% chance
                 if (changeDirection) {
                     const newDirection = Math.random() < 0.5 ? 1 : -1;
                     setDirection(newDirection);
