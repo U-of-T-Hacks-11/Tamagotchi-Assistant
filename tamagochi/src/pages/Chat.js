@@ -20,8 +20,8 @@ export default function Chat() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(input, chatHistory)
-        console.log('Fetching data')
+        // console.log(input, chatHistory)
+        // console.log('Fetching data')
         setInput(input)
         const response = await axios.get('http://localhost:3001/api/chat', {
           headers: {
@@ -49,28 +49,29 @@ export default function Chat() {
   }, [submitAPI])
 
   
-  const [router, setRouter] = useState('')
+  const [router, setRouter] = useState('__')
 
   useEffect(() => {
     const changeFeature = async () => {
       try {
         const response = await axios.get('http://localhost:3001/api/router', {
           headers: {
-            message: input
+            message: input,
           },
-        })
-        setRouter(response.data.join(''))
-       
+        });
+        console.log(response.data); // Log the response to check the received data
+        setRouter(response.data);
       } catch (error) {
-        console.error('Error fetching data:', error.message)
+        console.error('Error fetching data:', error.message);
       }
-    }
+    };
+  
     if (submitAPI > 0) {
-      changeFeature()
+      changeFeature();
     }
-  }, [submitAPI])
+  }, [submitAPI]);
 
-  console.log(chatHistory)
+  // console.log(chatHistory)
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>
   }
@@ -96,7 +97,7 @@ export default function Chat() {
           <Button
             onClick={() => {
               setSubmitAPI(submitAPI + 1)
-              setInput(transcript)
+              setInput(input + transcript)
             }}
           >
             Submit

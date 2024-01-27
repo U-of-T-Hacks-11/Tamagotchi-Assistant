@@ -37,12 +37,12 @@ app.get('/api/router', async (req, res) => {
       examples: examples,
     });
 
-    console.log(response);
+    console.log(response.classifications[0].prediction, response.classifications[0].confidence);
 
     if (response.classifications[0].confidence > 0.1) {
       res.json(response.classifications[0].prediction);
     } else {
-      res.json('Fallback prediction'); // Provide a fallback value if confidence is too low
+      res.json('Fallback');
     }
   } catch (error) {
     console.log(error);
@@ -56,14 +56,6 @@ app.get('/api/chat', async (req, res) => {
     const userMessage =
       req.headers['message'] + 'keep your response under 15 words' ||
       'Default message if header is not provided'
-
-    // ;(async () => {
-    //   const response = await cohere.classify({
-    //     inputs: [userMessage],
-    //     examples: examples,
-    //   })
-    //   console.log(response)
-    // })()
 
     console.log(req.headers)
     console.log(req.headers['chathistory'])
