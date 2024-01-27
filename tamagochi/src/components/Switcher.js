@@ -21,9 +21,6 @@ const Switcher = ({feedCharacter}) => {
       case 'timer':
         setCurrentComponent(<Timer />);
         break;
-      case 'chat':
-        setCurrentComponent(<Chat />);
-        break;
       case 'feed':
         setCurrentComponent(<Feed />);
         feedCharacter();
@@ -38,7 +35,6 @@ const Switcher = ({feedCharacter}) => {
       <div>
         <button onClick={() => handleButtonClick('home')}>Home</button>
         <button onClick={() => handleButtonClick('timer')}>Timer</button>
-        <button onClick={() => handleButtonClick('chat')}>Chat</button>
         <button 
           onClick={() => handleButtonClick('feed')}
           style={{ position: 'absolute', bottom: 20, right: 10 , fontSize: '18px', padding: '8px'}}
