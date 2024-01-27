@@ -65,8 +65,8 @@ const Switcher = ({ feedCharacter }) => {
         <button onClick={() => handleButtonClick('chat')}>
             chat
           </button>
-        <button
         <button onClick={() => handleButtonClick('notes')}><FaSave /></button>
+        <button
           onClick={() => handleButtonClick('feed')}
           style={{
             position: 'absolute',
