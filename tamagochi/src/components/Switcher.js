@@ -70,7 +70,7 @@ const Switcher = ({ feedCharacter }) => {
           <button className = 'button-icon' onClick={() => handleButtonClick('chat')}>
             <BsChatLeftTextFill />
           </button>
-          <button onClick={() => handleButtonClick('notes')}>
+          <button className = 'button-icon' onClick={() => handleButtonClick('notes')}>
             <FaSave />
           </button>
         </div>
