@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import Chat from '../pages/Chat';
-import Home from '../pages/Home';
-import Timer from '../pages/Timer';
-import Feed from '../pages/Feed';
-import hungerBar from '../pages/images/hungerBar.png';
+import React, { useState } from 'react'
+import Chat from '../pages/Chat'
+import Home from '../pages/Home'
+import Timer from '../pages/Timer'
+import Feed from '../pages/Feed'
+import hungerBar from '../pages/images/hungerBar.png'
 import { FaHome, FaHourglassHalf, FaSave } from "react-icons/fa";
+import { BsChatLeftTextFill } from "react-icons/bs";
 import Notes from '../pages/Notes';
+import './Switcher.css';
 // Sample components
 // const ComponentA = () => <div>Component A</div>;
 // const ComponentB = () => <div>Component B</div>;
@@ -55,17 +57,23 @@ const Switcher = ({ feedCharacter }) => {
   return (
     <div className='App'>
       <div>
-        <button onClick={() => handleButtonClick('home')}>
-          <FaHome />
-        </button>
-        <button onClick={() => handleButtonClick('timer')}>
-          <FaHourglassHalf />
-        </button>
-
-        <button onClick={() => handleButtonClick('chat')}>
-            chat
+        <div className = 'center-buttons'>
+          <button className = 'button-icon' onClick={() => handleButtonClick('home')}>
+            <FaHome />
           </button>
-        <button onClick={() => handleButtonClick('notes')}><FaSave /></button>
+          <button className = 'button-icon' onClick={() => handleButtonClick('timer')}>
+            <FaHourglassHalf />
+          </button>
+          <button className = 'button-icon' onClick={() => handleButtonClick('chat')}>
+            <BsChatLeftTextFill />
+          </button>
+          <button className = 'button-icon' onClick={() => handleButtonClick('chat')}>
+            <BsChatLeftTextFill />
+          </button>
+          <button onClick={() => handleButtonClick('notes')}>
+            <FaSave />
+          </button>
+        </div>
         <button
           onClick={() => handleButtonClick('feed')}
           style={{
