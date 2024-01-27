@@ -58,12 +58,11 @@ const Timer = () => {
     if (currentTimer === "work") {
       setCurrentTimer("break");
       setMinutes(5);
-      setSeconds(0);
     } else {
       setCurrentTimer("work");
       setMinutes(25);
-      setSeconds(0);
     }
+    setSeconds(0);
     setIsRunning(false);
   };
 
