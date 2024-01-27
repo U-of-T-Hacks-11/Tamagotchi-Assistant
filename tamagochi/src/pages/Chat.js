@@ -85,10 +85,7 @@ export default function Chat({ onRouterChange }) {
 
   return (
     <div>
-      <h1>Chat</h1>
-
       <p1>voice</p1>
-
       <p>Microphone: {listening ? 'on' : 'off'}</p>
       <button onClick={SpeechRecognition.startListening}>Start</button>
       {/* <button onClick={SpeechRecognition.stopListening}>Stop</button> */}
