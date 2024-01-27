@@ -58,10 +58,6 @@ export const Character = ({currentHealthImageIndex, setCurrentHealthImageIndex})
             }
 
             if (currentHealthImageIndex === 4) {
-                // Set a different image when health is dead
-                // You can replace 'newDeadImage' with the actual image you want to use
-                // Example: const newDeadImage = require('./images/newDeadImage.png');
-                //const newDeadImage = dead;
                 return dead;
             }
       
