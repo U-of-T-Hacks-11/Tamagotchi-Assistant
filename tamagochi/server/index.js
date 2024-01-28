@@ -117,7 +117,7 @@ app.get('/api/router', async (req, res) => {
       response.classifications[0].confidence
     )
 
-    if (response.classifications[0].confidence > 0.85) {
+    if (response.classifications[0].confidence > 0.9) {
       res.json({
         prediction: response.classifications[0].prediction,
         // confidence: response.classifications[0].confidence,
