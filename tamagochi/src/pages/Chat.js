@@ -5,6 +5,8 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition'
 import './Chat.css'
+import { PiMicrophoneFill } from "react-icons/pi";
+import { FaMicrophoneSlash } from "react-icons/fa";
 
 export default function Chat({ onRouterChange }) {
   const {
@@ -59,7 +61,7 @@ export default function Chat({ onRouterChange }) {
 
   const [router, setRouter] = useState('__')
   const [showRes, setShowRes] = useState(true)
-  
+  const reversedChatHistory = [...chatHistory].reverse();
 
   useEffect(() => {
     const changeFeature = async () => {
@@ -97,23 +99,26 @@ export default function Chat({ onRouterChange }) {
   return (
     <div className='chat-container'>
       <div className='voice-control'>
-        <p1>voice</p1>
-        <p>Microphone: {listening ? 'on' : 'off'}</p>
+        <div>
+        
         <button
           className='chat-button'
           onClick={SpeechRecognition.startListening}
         >
-          Start
+              {listening ? <PiMicrophoneFill size={14} style={{marginRight: '5px' }}/> : <FaMicrophoneSlash size={14} style={{marginRight: '5px' }}/>}
+    Start 
+
         </button>
         {/* <button onClick={SpeechRecognition.stopListening}>Stop</button> */}
-        <button className='chat-button' onClick={resetTranscript}>
+        <button className='chat-button' style={{fontSize: '17px'}} onClick={resetTranscript}>
           Reset
         </button>
-      </div>
 
-      <div className='chat-display'>
-        <div className='input-section'>
-          <TextInput
+        </div>
+
+      </div>
+      <div className='input-section'>
+          <input
             className='input'
             value={transcript ? transcript : input}
             onChange={(event) => setInput(event.currentTarget.value)}
@@ -137,6 +142,8 @@ export default function Chat({ onRouterChange }) {
             Submit
           </Button>
         </div>
+      <div className='chat-display'>
+
         {/* add loading chat box */}
         <div className='loading'>
           {isLoading ? (
@@ -146,18 +153,17 @@ export default function Chat({ onRouterChange }) {
           )}
         </div>
 
-        <div className='chat-history'>
-          {chatHistory.map((entry, index) => (
-            <div
-              key={index}
-              className={`chat-entry ${
-                entry.role === 'USER' ? 'user' : 'assistant'
-              }`}
-            >
-              <p>{entry.message}</p>
-            </div>
-          ))}
-        </div>
+        <div className='chat-history' style={{ overflow: 'hidden', maxWidth: '100%', maxHeight: '100vh' }}>
+  {reversedChatHistory.map((entry, index) => (
+    <div
+      key={index}
+      className={`chat-entry ${entry.role === 'USER' ? 'user' : 'assistant'}`}
+      style={{ overflow: 'hidden' }}
+    >
+      {entry.message}
+    </div>
+  ))}
+</div>
       </div>
     </div>
   )
