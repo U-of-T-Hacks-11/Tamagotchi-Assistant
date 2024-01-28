@@ -56,7 +56,9 @@ const examples = [
 ]
 app.get('/api/router', async (req, res) => {
   try {
-    const message = req.headers['message'];
+    const message = req.headers['message'] + ' keep your response under 15 words' ||
+    'Default message if header is not provided'
+
     
     const response = await cohere.classify({
       inputs: [message],
