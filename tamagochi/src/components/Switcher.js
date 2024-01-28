@@ -4,10 +4,12 @@ import Home from '../pages/Home'
 import Timer from '../pages/Timer'
 import Feed from '../pages/Feed'
 import hungerBar from '../pages/images/hungerBar.png'
-import { FaHome, FaHourglassHalf, FaSave } from "react-icons/fa";
-import { BsChatLeftTextFill } from "react-icons/bs";
-import Notes from '../pages/Notes';
-import './Switcher.css';
+import { FaHome, FaHourglassHalf, FaSave } from 'react-icons/fa'
+import { BsChatLeftTextFill } from 'react-icons/bs'
+import Notes from '../pages/Notes'
+import './Switcher.css'
+import Summarizer from '../pages/Summarizer'
+
 // Sample components
 // const ComponentA = () => <div>Component A</div>;
 // const ComponentB = () => <div>Component B</div>;
@@ -19,18 +21,27 @@ const Switcher = ({ feedCharacter }) => {
   const handleRouterChange = (newRouter) => {
     switch (newRouter) {
       case 'timer':
-        setCurrentComponent(<Timer />);
-        break;
+        setCurrentComponent(<Timer />)
+        break
       case 'chat':
         // Pass showRes prop here
-        setCurrentComponent(<Chat onRouterChange={handleRouterChange} showRes />);
-        break;
+        setCurrentComponent(
+          <Chat onRouterChange={handleRouterChange} showRes />
+        )
+        break
       // ... other cases
 
+
+
+
+
+
+      // add later
+
       default:
-        break;
+        break
     }
-  };
+  }
 
   const handleButtonClick = (component) => {
     switch (component) {
@@ -44,11 +55,14 @@ const Switcher = ({ feedCharacter }) => {
         setCurrentComponent(<Chat onRouterChange={handleRouterChange} />)
         break
       case 'feed':
-        feedCharacter();
-        break;
+        feedCharacter()
+        break
       case 'notes':
-        setCurrentComponent(<Notes />);
-        break;
+        setCurrentComponent(<Notes />)
+        break
+      case 'summarizer':
+        setCurrentComponent(<Summarizer />)
+        break
       default:
         setCurrentComponent(null)
     }
@@ -57,20 +71,35 @@ const Switcher = ({ feedCharacter }) => {
   return (
     <div className='App'>
       <div>
-        <div className = 'center-buttons'>
-          <button className = 'button-icon' onClick={() => handleButtonClick('home')}>
+        <div className='center-buttons'>
+          <button
+            className='button-icon'
+            onClick={() => handleButtonClick('home')}
+          >
             <FaHome />
           </button>
-          <button className = 'button-icon' onClick={() => handleButtonClick('timer')}>
+          <button
+            className='button-icon'
+            onClick={() => handleButtonClick('timer')}
+          >
             <FaHourglassHalf />
           </button>
-          <button className = 'button-icon' onClick={() => handleButtonClick('chat')}>
+          <button
+            className='button-icon'
+            onClick={() => handleButtonClick('chat')}
+          >
             <BsChatLeftTextFill />
           </button>
-          <button className = 'button-icon' onClick={() => handleButtonClick('chat')}>
-            <BsChatLeftTextFill />
+          <button
+            className='button-icon'
+            onClick={() => handleButtonClick('summarizer')}
+          >
+            summarizer
           </button>
-          <button className = 'button-icon' onClick={() => handleButtonClick('notes')}>
+          <button
+            className='button-icon'
+            onClick={() => handleButtonClick('notes')}
+          >
             <FaSave />
           </button>
         </div>

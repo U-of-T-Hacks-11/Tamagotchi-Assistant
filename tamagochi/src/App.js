@@ -1,3 +1,4 @@
+/* global chrome */
 import './App.css'
 import Switcher from './components/Switcher'
 import Character from './pages/Character'
