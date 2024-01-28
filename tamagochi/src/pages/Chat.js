@@ -97,9 +97,9 @@ export default function Chat({ onRouterChange }) {
   
 
   return (
-    <div className='chat-container'>
+    <div className='chat-container' style={{ marginTop: '5px' }}>
       <div className='voice-control'>
-        <div>
+        <div style={{ marginBottom: '5px' }}>
         
         <button
           className='chat-button'
