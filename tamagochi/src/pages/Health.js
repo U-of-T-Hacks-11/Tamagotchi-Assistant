@@ -16,7 +16,7 @@ export const Health = ({ characterPosition, onButtonPress, currentHealthImageInd
     useEffect(() => {
         const intervalId = setInterval(() => {
             setCurrentHealthImageIndex((prevIndex) => (prevIndex < 4 ? prevIndex + 1 : 4));
-        }, 2000);
+        }, 15000);
 
         return () => {
             clearInterval(intervalId);
