@@ -85,6 +85,7 @@ export default function Chat({ onRouterChange }) {
     if (submitAPI > 0) {
       changeFeature()
     }
+    setInput('')
   }, [submitAPI, onRouterChange])
 
   // console.log(chatHistory)
@@ -120,7 +121,7 @@ export default function Chat({ onRouterChange }) {
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 setSubmitAPI(submitAPI + 1);
-                setInput('');  // Clear input after submission
+                // setInput('');  // Clear input after submission
                 resetTranscript();
               }
             }}
@@ -130,7 +131,6 @@ export default function Chat({ onRouterChange }) {
             onClick={() => {
               setSubmitAPI(submitAPI + 1)
               setInput(input + transcript)
-              setInput('');
               resetTranscript()
             }}
           >
