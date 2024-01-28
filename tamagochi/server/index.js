@@ -73,7 +73,7 @@ app.get('/api/router', async (req, res) => {
     //   res.json('Fallback');
     // }
 
-    if (response.classifications[0].confidence > 0.88) {
+    if (response.classifications[0].confidence > 0.85) {
       res.json({
         prediction: response.classifications[0].prediction
         // confidence: response.classifications[0].confidence,

@@ -4,7 +4,7 @@ import Character from './pages/Character'
 import React, { useState, useEffect } from 'react';
 
 function App() {
-  const [charSelect, setCharacter] = useState(1);
+  const [charSelect, setCharacter] = useState(0);
   const [currentHealthImageIndex, setCurrentHealthImageIndex] = useState(0);
   const feedCharacter = () => {
     console.log(currentHealthImageIndex)
