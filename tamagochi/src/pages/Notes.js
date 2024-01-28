@@ -72,7 +72,7 @@ const Notes = () => {
                                 <h2>Your Notes:</h2>
                                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', justifyContent: 'center', overflow: 'auto', height: '260px' }}>
                                     {notes.map((note, index) => (
-                                        <div onClick={() => setSelectedNote(index + 1)} key={index} style={{ border: '1px solid #ccc', padding: '8px', borderRadius: '4px', justifyContent: 'space-between', width: '50px' }}>
+                                        <div onClick={() => setSelectedNote(index + 1)} key={index} style={{ border: '1px solid #ccc', padding: '8px', borderRadius: '4px', justifyContent: 'space-between', width: '50px', height: '50px', overflow: 'auto' }}>
                                             <FaSave style={{ marginRight: '8px' }} />
                                             {note.title}
                                         </div>
