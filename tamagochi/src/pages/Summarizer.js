@@ -63,7 +63,7 @@ export default function Summarizer({ onRouterChange }) {
           className='input'
           value={transcript ? transcript : input}
           onChange={(event) => setInput(event.currentTarget.value)}
-          placeholder='Ask me a question!'
+          placeholder='Summarize anything!'
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               setSubmitAPI(submitAPI + 1)
