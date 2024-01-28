@@ -1,8 +1,6 @@
 body {
-  /* background-color: rgba(114, 60, 93, 0.979); */
   background-color: rgb(149, 101, 158);
-  /* background-image: url('pages/images/pinkAesth.jpg'); */
-  background-size: cover;  /* Adjust as needed */
+  background-size: cover;
   margin: 0;
   padding: 0;
   height: 100vh;
