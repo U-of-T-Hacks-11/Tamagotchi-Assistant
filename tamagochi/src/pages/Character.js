@@ -13,6 +13,7 @@ export const Character = ({ charSelect, setCharacter, currentHealthImageIndex, s
     const [isStopped, setIsStopped] = useState(false);
     const [charVal, setCharVal] = useState(charSelect);
     console.log(charVal)
+    console.log(charSelect)
     
     useEffect(() => {
         const handleResize = () => {
@@ -60,7 +61,7 @@ export const Character = ({ charSelect, setCharacter, currentHealthImageIndex, s
         };
     }, [position, screenWidth, direction, currentHealthImageIndex]);
 
-    if (charVal === 0) {
+    if (charSelect === 0) {
       return (
         <div className="character" style={{ left: `${position + 175}px` }}>
             <Health currentHealthImageIndex={currentHealthImageIndex} setCurrentHealthImageIndex={setCurrentHealthImageIndex} />
@@ -68,7 +69,7 @@ export const Character = ({ charSelect, setCharacter, currentHealthImageIndex, s
         </div>
     )}
 
-    else if (charVal === 1) {
+    else if (charSelect === 1) {
       return (
       <div className="character" style={{ left: `${position + 175}px` }}>
           <Health currentHealthImageIndex={currentHealthImageIndex} setCurrentHealthImageIndex={setCurrentHealthImageIndex} />

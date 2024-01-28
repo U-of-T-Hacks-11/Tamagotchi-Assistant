@@ -1,76 +1,84 @@
-import React, { useState } from 'react'
-import Chat from '../pages/Chat'
-import Home from '../pages/Home'
-import Timer from '../pages/Timer'
-import Feed from '../pages/Feed'
-import hungerBar from '../pages/images/hungerBar.png'
-import { FaHome, FaHourglassHalf, FaSave } from "react-icons/fa";
-import { BsChatLeftTextFill } from "react-icons/bs";
+import React, { useState } from 'react';
+import { FaHome, FaHourglassHalf, FaSave } from 'react-icons/fa';
+import { BsChatLeftTextFill } from 'react-icons/bs';
 import Notes from '../pages/Notes';
+import Timer from '../pages/Timer';
+import Chat from '../pages/Chat';
+import Home from '../pages/Home';
+import hungerBar from '../pages/images/hungerBar.png';
 import './Switcher.css';
-// Sample components
-// const ComponentA = () => <div>Component A</div>;
-// const ComponentB = () => <div>Component B</div>;
-// const ComponentC = () => <div>Component C</div>;
 
 const Switcher = ({ feedCharacter, charSelect, setCharacter }) => {
-  const [currentComponent, setCurrentComponent] = useState(<Home charSelect={charSelect} setCharacter={setCharacter} />)
-  console.log(charSelect, setCharacter);
+  const [pageNumber, setPageNumber] = useState(0);
   const handleRouterChange = (newRouter) => {
     switch (newRouter) {
       case 'timer':
-        setCurrentComponent(<Timer />);
+        setPageNumber(1);
         break;
       case 'chat':
         // Pass showRes prop here
-        setCurrentComponent(<Chat onRouterChange={handleRouterChange} showRes />);
+        setPageNumber(2);
         break;
       // ... other cases
-
+  
       default:
         break;
     }
   };
-
   const handleButtonClick = (component) => {
     switch (component) {
       case 'home':
-        setCurrentComponent(<Home charSelect={charSelect} setCharacter={setCharacter}  />)
-        break
+        setPageNumber(0);
+        break;
       case 'timer':
-        setCurrentComponent(<Timer />)
-        break
+        setPageNumber(1);
+        break;
       case 'chat':
-        setCurrentComponent(<Chat onRouterChange={handleRouterChange} />)
-        break
+        setPageNumber(2);
+        break;
       case 'feed':
         feedCharacter();
         break;
       case 'notes':
-        setCurrentComponent(<Notes />);
+        setPageNumber(3);
         break;
       default:
-        setCurrentComponent(null)
+        setPageNumber(0);
     }
-  }
+  };
+
+  const renderPage = () => {
+    switch (pageNumber) {
+      case 0:
+        return <Home charSelect={charSelect} setCharacter={setCharacter} />;
+      case 1:
+        return <Timer />;
+      case 2:
+        return <Chat onRouterChange={handleRouterChange} />;
+      case 3:
+        return <Notes />;
+      default:
+        return null;
+    }
+  };
 
   return (
-    <div className='App'>
+    <div className="App">
       <div>
-        <div className = 'center-buttons'>
-          <button className = 'button-icon' onClick={() => handleButtonClick('home')}>
+        <div className="center-buttons">
+          <button className="button-icon" onClick={() => handleButtonClick('home')}>
             <FaHome />
           </button>
-          <button className = 'button-icon' onClick={() => handleButtonClick('timer')}>
+          <button className="button-icon" onClick={() => handleButtonClick('timer')}>
             <FaHourglassHalf />
           </button>
-          <button className = 'button-icon' onClick={() => handleButtonClick('chat')}>
+          <button className="button-icon" onClick={() => handleButtonClick('chat')}>
             <BsChatLeftTextFill />
           </button>
-          <button className = 'button-icon' onClick={() => handleButtonClick('chat')}>
+          <button className="button-icon" onClick={() => handleButtonClick('chat')}>
             <BsChatLeftTextFill />
           </button>
-          <button className = 'button-icon' onClick={() => handleButtonClick('notes')}>
+          <button className="button-icon" onClick={() => handleButtonClick('notes')}>
             <FaSave />
           </button>
         </div>
@@ -90,14 +98,18 @@ const Switcher = ({ feedCharacter, charSelect, setCharacter }) => {
         >
           <img
             src={hungerBar}
-            alt='Hunger Bar'
+            alt="Hunger Bar"
             style={{ width: '50px', height: '50px' }}
           />
         </button>
       </div>
-      <div>{currentComponent}</div>
+      <div>{renderPage()}</div>
     </div>
-  )
-}
+  );
+};
 
-export default Switcher
+export default Switcher;
+
+
+
+
