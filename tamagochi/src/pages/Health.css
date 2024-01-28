@@ -1,12 +1,10 @@
 .health {
     position: absolute;
     bottom: 85px;
-    /* Adjust as needed */
     transition: left 0.5s ease-in-out;
-    /* Smooth transition for the character movement */
 }
 
 .health img {
     height: 40px;
-    width: 75px; /* Adjust the size of your healthbar image */
+    width: 75px;
 }
