@@ -13,9 +13,9 @@ import './Switcher.css';
 // const ComponentB = () => <div>Component B</div>;
 // const ComponentC = () => <div>Component C</div>;
 
-const Switcher = ({ feedCharacter }) => {
-  const [currentComponent, setCurrentComponent] = useState(<Home />)
-
+const Switcher = ({ feedCharacter, charSelect, setCharacter }) => {
+  const [currentComponent, setCurrentComponent] = useState(<Home charSelect={charSelect} setCharacter={setCharacter} />)
+  console.log(charSelect, setCharacter);
   const handleRouterChange = (newRouter) => {
     switch (newRouter) {
       case 'timer':
@@ -35,7 +35,7 @@ const Switcher = ({ feedCharacter }) => {
   const handleButtonClick = (component) => {
     switch (component) {
       case 'home':
-        setCurrentComponent(<Home />)
+        setCurrentComponent(<Home charSelect={charSelect} setCharacter={setCharacter}  />)
         break
       case 'timer':
         setCurrentComponent(<Timer />)
