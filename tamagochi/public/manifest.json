@@ -4,7 +4,7 @@
   "version": "1.0",
   "description": "Study better with your personal AI Tamagotchi assistant",
   "browser_action": {
-    "default_icon": "Subject.png",
+    "default_icon": "gotchi.png",
     "default_popup": "index.html"
   },
   
