@@ -1,7 +1,53 @@
-.user{
-    background-color: azure;
-}
-
-.assistant{
-    background-color: blueviolet;
-}
+.chat-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .voice-control {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .chat-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .input-section {
+    display: flex;
+  }
+  
+  .input {
+    flex: 1;
+    padding: 10px;
+  }
+  
+  .chat-display {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .chat-entry {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
+  
+  .user {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .assistant {
+    background-color: #2196f3;
+    color: white;
+  }

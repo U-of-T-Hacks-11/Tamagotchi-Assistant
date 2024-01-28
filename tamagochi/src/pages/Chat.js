@@ -17,8 +17,9 @@ export default function Chat({ onRouterChange }) {
   const [input, setInput] = useState('')
   const [submitAPI, setSubmitAPI] = useState(0)
   const [chatHistory, setChatHistory] = useState([])
-
   const [messageList, setMessageList] = useState([])
+
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +27,7 @@ export default function Chat({ onRouterChange }) {
         setShowRes(true)
         // console.log(input, chatHistory)
         // console.log('Fetching data')
+        setIsLoading(true)
         setInput(input)
         const response = await axios.get('http://localhost:3001/api/chat', {
           headers: {
@@ -38,15 +40,7 @@ export default function Chat({ onRouterChange }) {
         })
         setMessages(response.data.join(''))
         console.log(chatHistory)
-
-        // if (messages && showRes) {
-        //   const newMessages = [
-        //     ...messages,
-        //     { text: input, isUser: true },
-        //     { text: messages, isUser: false },
-        //   ]
-        //   setMessageList(newMessages) // Update messages array with user input and bot response
-        // }
+        setIsLoading(false)
 
         setChatHistory([
           ...chatHistory,
@@ -65,6 +59,7 @@ export default function Chat({ onRouterChange }) {
 
   const [router, setRouter] = useState('__')
   const [showRes, setShowRes] = useState(true)
+  
 
   useEffect(() => {
     const changeFeature = async () => {
@@ -90,29 +85,49 @@ export default function Chat({ onRouterChange }) {
     if (submitAPI > 0) {
       changeFeature()
     }
+    setInput('')
   }, [submitAPI, onRouterChange])
 
   // console.log(chatHistory)
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>
   }
+  
 
   return (
-    <div>
-      <p1>voice</p1>
-      <p>Microphone: {listening ? 'on' : 'off'}</p>
-      <button onClick={SpeechRecognition.startListening}>Start</button>
-      {/* <button onClick={SpeechRecognition.stopListening}>Stop</button> */}
-      <button onClick={resetTranscript}>Reset</button>
-      <p>{transcript}</p>
-      <div>
-        <Group style={{ position: 'absolute', height: '5vh', width: '100%' }}>
+    <div className='chat-container'>
+      <div className='voice-control'>
+        <p1>voice</p1>
+        <p>Microphone: {listening ? 'on' : 'off'}</p>
+        <button
+          className='chat-button'
+          onClick={SpeechRecognition.startListening}
+        >
+          Start
+        </button>
+        {/* <button onClick={SpeechRecognition.stopListening}>Stop</button> */}
+        <button className='chat-button' onClick={resetTranscript}>
+          Reset
+        </button>
+      </div>
+
+      <div className='chat-display'>
+        <div className='input-section'>
           <TextInput
+            className='input'
             value={transcript ? transcript : input}
             onChange={(event) => setInput(event.currentTarget.value)}
             placeholder='Ask me a question!'
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                setSubmitAPI(submitAPI + 1);
+                // setInput('');  // Clear input after submission
+                resetTranscript();
+              }
+            }}
           />
           <Button
+            className='chat-button'
             onClick={() => {
               setSubmitAPI(submitAPI + 1)
               setInput(input + transcript)
@@ -121,37 +136,28 @@ export default function Chat({ onRouterChange }) {
           >
             Submit
           </Button>
-          {/* <h1>{router}</h1> */}
-          {/* <h1>{typeof router === 'object' ? router.prediction : router}</h1> */}
+        </div>
+        {/* add loading chat box */}
+        <div className='loading'>
+          {isLoading ? (
+            <div className='loading-text chat-entry user'>Loading...</div>
+          ) : (
+            null
+          )}
+        </div>
 
-          <div id='div1' style={{ height: '500px', position: 'relative' }}>
+        <div className='chat-history'>
+          {chatHistory.map((entry, index) => (
             <div
-              id='div2'
-              style={{
-                maxHeight: '100%',
-                overflow: 'auto',
-                border: '1px solid red',
-              }}
+              key={index}
+              className={`chat-entry ${
+                entry.role === 'USER' ? 'user' : 'assistant'
+              }`}
             >
-              <div
-                id='div3'
-                style={{ height: '1500px', border: '5px solid yellow' }}
-              >
-                {chatHistory.map((entry, index) => (
-                  <div
-                    key={index}
-                    className={`${
-                      entry.role === 'USER' ? 'user' : 'assistant'
-                    }`}
-                  >
-                    <p>{entry.message}</p>
-                  </div>
-                ))}
-              </div>
+              <p>{entry.message}</p>
             </div>
-          </div>
-          {/* {showRes ? <p>{messages}</p> : null} */}
-        </Group>
+          ))}
+        </div>
       </div>
     </div>
   )
