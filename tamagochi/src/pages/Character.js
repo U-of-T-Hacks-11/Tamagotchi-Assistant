@@ -25,7 +25,7 @@ export const Character = ({ currentHealthImageIndex, setCurrentHealthImageIndex 
     useEffect(() => {
         const characterWidth = 150;
         const minPosition = 0;
-        const maxPosition = screenWidth - characterWidth;
+        const maxPosition = screenWidth;
 
         // Check if the health bar has reached index 4
         if (currentHealthImageIndex === 4) {
@@ -45,9 +45,9 @@ export const Character = ({ currentHealthImageIndex, setCurrentHealthImageIndex 
                 setDirection(1);
             } else {
                 // Update the position based on the current direction
-                setPosition((prevPosition) => prevPosition + direction * 2);
+                setPosition((prevPosition) => (prevPosition + direction)*0.1);
             }
-        }, 300); // Increase the interval delay for slower movement
+        }, 600); // Increase the interval delay for slower movement
 
         const handleResize = () => {
             setScreenWidth(window.innerWidth);
