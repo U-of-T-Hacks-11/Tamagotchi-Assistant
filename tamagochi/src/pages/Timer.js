@@ -73,15 +73,16 @@ const Timer = () => {
           variant="filled"
           styles={{
             root: {
-              backgroundColor: "rgba(0, 0, 0, 0.0)",
+              backgroundColor: "rgba(0, 0, 0, 0.1)",
               borderRadius: 10,
               padding: '0.5rem 4rem',
               outline: 'none',
               border: '7px solid rgba(14, 51, 19, 0.74)',
+              boxShadow: '0 0 50px 15px rgba(58, 122, 67, 0.2)',
             },
           }}
         >
-          <h1 style={{ fontFamily: 'monospace', textShadow: '1px 1px 2px rgba(42, 90, 49, 0.74), 0 0 1em rgba(42, 90, 49, 0.74), 0 0 0.2em rgba(42, 90, 49, 0.74)' }}>
+          <h1 style={{ fontFamily: 'monospace' }}>
             {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
           </h1>
         </Button>
