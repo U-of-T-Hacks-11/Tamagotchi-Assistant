@@ -124,7 +124,7 @@ const Notes = () => {
                             />
                             <TextField
                                 id="standard-textarea"
-                                label="Create a note!"
+                                label="Add a description!"
                                 placeholder="Enter your note..."
                                 multiline
                                 variant="standard"
