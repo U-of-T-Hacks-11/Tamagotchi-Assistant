@@ -1,9 +1,11 @@
 import './App.css'
 import Switcher from './components/Switcher'
 import Character from './pages/Character'
+import CharSelect from './components/CharSelect';
 import React, { useState, useEffect } from 'react';
 
 function App() {
+  const [charSelect, setCharacter] = useState(1);
   const [currentHealthImageIndex, setCurrentHealthImageIndex] = useState(0);
   const feedCharacter = () => {
     console.log(currentHealthImageIndex)
@@ -13,8 +15,9 @@ function App() {
   return (
     <main>
       <div className='size'>
+        <CharSelect charSelect={charSelect} setCharacter={setCharacter} />
         <Switcher feedCharacter={feedCharacter} />
-        <Character currentHealthImageIndex={currentHealthImageIndex} setCurrentHealthImageIndex={setCurrentHealthImageIndex}/>
+        <Character charSelect={charSelect} setCharacter={setCharacter} currentHealthImageIndex={currentHealthImageIndex} setCurrentHealthImageIndex={setCurrentHealthImageIndex}/>
       </div>
     </main>
   )

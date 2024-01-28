@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './Character.css';
 import happyRight from './images/c10.png';
 import happyLeft from './images/c1.png';
+import sadRight from './images/c21.png';
+import sadLeft from './images/c22.png';
 import Health from './Health';
 
-export const Character = ({ currentHealthImageIndex, setCurrentHealthImageIndex }) => {
+export const Character = ({ charSelect, setCharacter, currentHealthImageIndex, setCurrentHealthImageIndex }) => {
     const [position, setPosition] = useState(0);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [direction, setDirection] = useState(1); // 1 for moving right, -1 for moving left
     const [isStopped, setIsStopped] = useState(false);
-
+    
     useEffect(() => {
         const handleResize = () => {
             setScreenWidth(window.innerWidth);
@@ -56,12 +58,22 @@ export const Character = ({ currentHealthImageIndex, setCurrentHealthImageIndex 
         };
     }, [position, screenWidth, direction, currentHealthImageIndex]);
 
-    return (
+    if (charSelect === 0) {
+      return (
         <div className="character" style={{ left: `${position + 175}px` }}>
             <Health currentHealthImageIndex={currentHealthImageIndex} setCurrentHealthImageIndex={setCurrentHealthImageIndex} />
             <img src={direction === 1 ? happyRight : happyLeft} alt="Character" />
         </div>
-    );
+    )}
+
+    else if (charSelect === 1) {
+      return (
+      <div className="character" style={{ left: `${position + 175}px` }}>
+          <Health currentHealthImageIndex={currentHealthImageIndex} setCurrentHealthImageIndex={setCurrentHealthImageIndex} />
+          <img src={direction === 1 ? sadRight : sadLeft} alt="Character" />
+      </div>
+    )}
+    
 };
 
 export default Character;
