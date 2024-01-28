@@ -49,6 +49,7 @@ export default function Summarizer({ onRouterChange }) {
     if (submitAPI > 0) {
       fetchData()
     }
+    setInput('')
   }, [submitAPI, onRouterChange])
 
   if (!browserSupportsSpeechRecognition) {
@@ -67,7 +68,6 @@ export default function Summarizer({ onRouterChange }) {
             if (e.key === 'Enter') {
               setSubmitAPI(submitAPI + 1)
               resetTranscript()
-              setInput('')
             }
           }}
         />
@@ -76,7 +76,6 @@ export default function Summarizer({ onRouterChange }) {
           onClick={() => {
             setSubmitAPI(submitAPI + 1)
             resetTranscript()
-            setInput('')
           }}
         >
           Submit
