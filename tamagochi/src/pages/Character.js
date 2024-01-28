@@ -45,9 +45,9 @@ export const Character = ({ currentHealthImageIndex, setCurrentHealthImageIndex 
                 setDirection(1);
             } else {
                 // Update the position based on the current direction
-                setPosition((prevPosition) => (prevPosition + direction)*0.1);
+                setPosition((prevPosition) => (prevPosition + direction*0.5));
             }
-        }, 600); // Increase the interval delay for slower movement
+        }, 800); // Increase the interval delay for slower movement
 
         const handleResize = () => {
             setScreenWidth(window.innerWidth);
@@ -62,7 +62,7 @@ export const Character = ({ currentHealthImageIndex, setCurrentHealthImageIndex 
     }, [position, screenWidth, direction, currentHealthImageIndex]);
 
     return (
-        <div className="character" style={{ left: `${position + 150}px` }}>
+        <div className="character" style={{ left: `${position + 175}px` }}>
             <Health currentHealthImageIndex={currentHealthImageIndex} setCurrentHealthImageIndex={setCurrentHealthImageIndex} />
             <img src={direction === 1 ? happyRight : happyLeft} alt="Character" />
         </div>
