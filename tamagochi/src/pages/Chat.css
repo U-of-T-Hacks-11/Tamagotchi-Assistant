@@ -16,8 +16,8 @@
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-    margin: 5px;
-    border-radius: 20%; 
+    border-radius: 10px; 
+    margin-left: 5px;
   }
   .input-section {
     display: flex;

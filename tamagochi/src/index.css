@@ -11,3 +11,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.selectDisable {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+* {
+  user-select: none;
+}
+
+html{
+  scrollbar-gutter: stable both-edges;
+}
+body::-webkit-scrollbar {
+   width: 0.6em;
+   height: 0.6em;
+   background-color: transparent;
+   overflow-x: hidden;
+}
+
+body::-webkit-scrollbar-thumb {
+   border-radius: 1em;
+   background-color: #8fa4b8;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+   background-color: #7ea6cc;
+}
